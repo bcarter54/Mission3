@@ -62,7 +62,7 @@ while (continueUser == false)
 
                 while (!isValidDate)
                 {
-                    Console.WriteLine("Enter the item expiration date (mm/dd/yyyy):");
+                    Console.WriteLine("Enter the item expiration date (mm/dd/yyyy):\n");
 
                     string userInput = Console.ReadLine();
                     
@@ -131,7 +131,7 @@ while (continueUser == false)
 
                     if (!validDelete)
                     {
-                        Console.WriteLine("\nInvalid input. Would you still like to delete an item? (Enter Y or N):\n");
+                        Console.WriteLine("\nInvalid input. Would you still like to delete an item? (Enter Y for Yes or any other key for No):\n");
                         string stillDelete = Console.ReadLine();
 
                         if (stillDelete.ToUpper() != "Y")
@@ -155,7 +155,7 @@ while (continueUser == false)
             {
                 for (int i = 0; i < foodItems.Count; i++)
                 {
-                    Console.WriteLine($"\n--{i+1}-- \n {foodItems[i].Name} \n {foodItems[i].Category} \n {foodItems[i].Quantity} \n {foodItems[i].ExpirationDate.ToShortDateString()}\n");
+                    Console.WriteLine($"\n--{i+1}-- \nItem Name: {foodItems[i].Name} \nItem Category: {foodItems[i].Category} \nItem Quantity: {foodItems[i].Quantity} \nItem Expiration Date: {foodItems[i].ExpirationDate.ToShortDateString()}\n");
                 }
 
                 if (foodItems.Count == 0)
