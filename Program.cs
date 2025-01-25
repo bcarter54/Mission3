@@ -94,9 +94,8 @@ while (continueUser == false)
             // Delete food item option
             if (int.Parse(userChoice) == 2 && foodItems.Count > 0)
             {
-                
                 Boolean validDelete = false;
-                while (validDelete == false)
+                while (!validDelete)
                 {
                     // List off food items
                     Console.WriteLine("\nEnter the number of the item you would like to delete:\n");
@@ -104,54 +103,52 @@ while (continueUser == false)
                     {
                         Console.WriteLine($"{i + 1}. {foodItems[i].Name}");
                     }
+
                     string deleteNumber = Console.ReadLine();
 
                     if (int.TryParse(deleteNumber, out int itemDelete))
-                    { 
+                    {
                         // Loop through food items to find matching number and delete if there is a matching number
                         for (int i = 0; i < foodItems.Count; i++)
                         {
-                        if (itemDelete == (i+1))
-                        {
-                            foodItems.RemoveAt(i);
-                            
-                            Console.WriteLine("\nItem deleted successfully. Press enter to return to the main menu...");
-                            Console.ReadLine();
-                            validDelete = true;
-                        }
-                        // If there isn't a valid number, send error message and offer reselection
-                        else
-                        {
-                            Console.WriteLine("\nInvalid input. Would you still like to delete an item? (Enter Y or N):\n");
-                            string stillDelete = Console.ReadLine();
-                            
-                            if (stillDelete.ToUpper() == "Y")
+                            if (itemDelete == (i + 1))
                             {
-                                validDelete = false;
-                            }
-                            else
-                            {
-                                Console.WriteLine("\nPress enter to return to the main menu...");
+                                foodItems.RemoveAt(i);
+
+                                Console.WriteLine("\nItem deleted successfully. Press enter to return to the main menu...");
                                 Console.ReadLine();
                                 validDelete = true;
+                                break; // Exit the for loop immediately
                             }
                         }
-                        }
+
+
                     }
-                    // Eror message for invalid input
                     else
                     {
                         Console.WriteLine("\nInvalid input. Please enter a valid number.\n");
                     }
+
+                    if (!validDelete)
+                    {
+                        Console.WriteLine("\nInvalid input. Would you still like to delete an item? (Enter Y or N):\n");
+                        string stillDelete = Console.ReadLine();
+
+                        if (stillDelete.ToUpper() != "Y")
+                        {
+                            Console.WriteLine("\nPress enter to return to the main menu...");
+                            Console.ReadLine();
+                            validDelete = true;
+                        }
+                    }
                 }
             }
-            
-            // If there are no items to delete, display message
             else if (int.Parse(userChoice) == 2 && foodItems.Count == 0)
             {
                 Console.WriteLine("\nThere are no items to delete. Press enter to return to the main menu...\n");
                 Console.ReadLine();
             }
+
             
             // Print off current food items
             if (int.Parse(userChoice) == 3)
